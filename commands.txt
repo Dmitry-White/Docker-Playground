@@ -1,0 +1,52 @@
+# Build Image
+docker image build -t dmitrywhite/docker-playground:first-container .
+docker build -t dmitrywhite/docker-playground:first-container .
+
+# List Images
+docker image ls
+docker images
+
+# List Images, Return IDs Only
+docker image ls -q
+docker images -q
+
+# Login to Docker Hub
+docker login
+
+# Push Image
+docker image push dmitrywhite/docker-playground:first-container
+docker push dmitrywhite/docker-playground:first-container
+
+# Run Container, Detached
+docker container run -d --name web -p 8000:8080 dmitrywhite/docker-playground:first-container
+docker run -d --name web -p 8000:8080 dmitrywhite/docker-playground:first-container
+
+# Run Container, Interactive + TTY
+docker container run -it --name web -p 8000:8080 dmitrywhite/docker-playground:first-container
+docker run -it --name web -p 8000:8080 dmitrywhite/docker-playground:first-container
+
+# List Containers, Only Running
+docker container ls
+docker ps
+
+# List Containers, Only Running
+docker container ls -a
+docker ps -a
+
+# Start, Stop, Remove, Restart
+docker container start web
+docker start web
+
+docker container stop web
+docker stop web
+
+docker container rm web -f
+docker rm web -f
+
+docker container restart web
+docker restart web
+
+
+
+
+
