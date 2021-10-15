@@ -1,5 +1,3 @@
-# Simple counter-app for demonstrating Docker Compose
-Simple flask app that counts web site visits and stores in a default Redis backend.
+# Nodejs web app
 
-**References:**
-- Getting Started with Docker video training course
+Express app that counts web site visits and stores in a default Redis backend.

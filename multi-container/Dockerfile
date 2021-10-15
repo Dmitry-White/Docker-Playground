@@ -1,14 +1,17 @@
 # Base image
-FROM python:alpine
+FROM node:current-alpine
 
-# Add app code to /code inside container image
-ADD . /code
+# Create directory in container image for app code
+RUN mkdir -p /usr/src/app
 
-# Set working directory for subsequent commands
-WORKDIR /code
+# Copy app code (.) to /usr/src/app in container image
+COPY . /usr/src/app
 
-# Install dependencies
-RUN pip install -r requirements.txt
+# Set working directory context
+WORKDIR /usr/src/app
 
-# Command to run when container starts
-ENTRYPOINT ["python", "app.py"]
+# Install dependencies from packages.json
+RUN npm install
+
+# Command for container to execute
+ENTRYPOINT [ "node", "app.js" ]

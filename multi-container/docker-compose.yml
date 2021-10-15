@@ -1,8 +1,9 @@
 version: "3.8"
 services:
+  # Web Server App
   web-fe:
     build: .
-    command: python app.py
+    command: node app.js
     ports:
       - target: 5000
         published: 5000
@@ -11,11 +12,13 @@ services:
     volumes:
       - type: volume
         source: counter-vol
-        target: /code
+        target: /usr/src/app
+
+  # Web Server Cache
   redis:
     image: "redis:alpine"
     networks:
-      counter-net:
+      - counter-net
 
 networks:
   counter-net:

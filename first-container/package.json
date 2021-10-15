@@ -4,6 +4,9 @@
   "description": "Web server showing host that responded",
   "author": "Dmitry White",
   "license": "MIT",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^5.1.0",
