@@ -5,7 +5,7 @@ services:
     image: dmitrywhite/docker-playground:swarm-stack
     command: node app.js
     deploy:
-      replicas: 10
+      replicas: 5
     ports:
       - target: 5000
         published: 5000

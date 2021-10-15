@@ -1,0 +1,33 @@
+# Build Image
+docker image build -t dmitrywhite/docker-playground:swarm-stack .
+docker build -t dmitrywhite/docker-playground:swarm-stack .
+
+# List Images
+docker image ls
+docker images
+
+# List Images, Return IDs Only
+docker image ls -q
+docker images -q
+
+# Login to Docker Hub
+docker login
+
+# Push Image
+docker image push dmitrywhite/docker-playground:swarm-stack
+docker push dmitrywhite/docker-playground:swarm-stack
+
+# Deploy Stack
+docker stack deploy -c docker-compose.yml <STACK_NAME>
+
+# List Stacks
+docker stack ls
+
+# View Stack Details
+docker stack services <STACK_NAME>
+
+# View Stack Containers
+docker stack ps <STACK_NAME>
+
+# Remove Stack
+docker stack rm <STACK_NAME>
