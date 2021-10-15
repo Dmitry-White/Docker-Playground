@@ -1,0 +1,38 @@
+# Run Multiple
+docker-compose up
+
+# Shutdown Multiple
+docker-compose down
+
+# Initialise Docker swarm
+docker swarm init
+
+# Get "Add Manager" command
+docker swarm join-token manager
+
+# Get "Add Worker" command
+docker swarm join-token worker
+
+# Add machine to the swarm
+docker swarm join --token <YOUR_TOKEN> 192.168.65.3:2377
+
+# List Machines
+docker node ls
+
+# Create Service
+docker service create --name <SERVICE_NAME> -p 5000:8080 --replicas 3 <IMAGE_NAME>
+
+# List Services
+docker service ls
+
+# List Service Replicas, Local Only, Non-Specific
+docker container ls 
+
+# List Service Replcas, Local and Remote, Specific
+docker service ps <SERVICE_NAME>
+
+# Remove Service
+docker service ps <SERVICE_NAME>
+
+# Scale Service
+docker service scale <SERVICE_NAME>=10
