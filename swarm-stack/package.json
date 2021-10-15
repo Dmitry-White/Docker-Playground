@@ -1,0 +1,15 @@
+{
+  "name": "multi-container",
+  "version": "1.0.0",
+  "description": "Web server counting cache hits",
+  "author": "Dmitry White",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "redis": "^3.1.2"
+  }
+}

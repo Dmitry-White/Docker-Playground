@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  # Web Server App
+  web-fe:
+    image: dmitrywhite/docker-playground:swarm-stack
+    command: node app.js
+    deploy:
+      replicas: 10
+    ports:
+      - target: 5000
+        published: 5000
+    networks:
+      - counter-net
+    volumes:
+      - type: volume
+        source: counter-vol
+        target: /usr/src/app
+
+  # Web Server Cache
+  redis:
+    image: "redis:alpine"
+    networks:
+      - counter-net
+
+networks:
+  counter-net:
+
+volumes:
+  counter-vol:
