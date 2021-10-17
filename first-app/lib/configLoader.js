@@ -1,13 +1,15 @@
-'use strict';
+const logger = require('./logger');
 
-var logger  = require('./logger'),
-    env     = process.env.NODE_ENV;
+let env = process.env.NODE_ENV;
 
 if (!env) {
   env = 'development';
-} 
+}
 
-logger.log('Node environment: ' + env);
-logger.log('loading config.' + env + '.json');
+logger.log(`Node environment: ${env}`);
+logger.log(`loading config.${env}.json`);
 
-module.exports = require('../config/config.' + env + '.json');
+// eslint-disable-next-line
+const config = require(`../config/config.${env}.json`);
+
+module.exports = config;

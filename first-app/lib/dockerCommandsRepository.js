@@ -1,25 +1,17 @@
-'use strict';
+const DockerCommand = require('../models/dockerCommand');
 
-var DockerCommand = require('../models/dockerCommand');
+const dockerCommandsRepository = (() => {
+  const getDockerCommands = (callback) => {
+    DockerCommand.find((err, commands) => {
+      if (err) return callback(err, null);
 
-var dockerCommandsRepository = function() {
+      return callback(err, commands);
+    });
+  };
 
-    var getDockerCommands = function(callback) {
-
-        DockerCommand.find(function(err, commands) {
-
-            if (err) return callback(err, null);
-
-            callback(err, commands);
-
-        });
-
-    };
-
-    return {
-        getDockerCommands : getDockerCommands
-    };
-
-}();
+  return {
+    getDockerCommands,
+  };
+})();
 
 module.exports = dockerCommandsRepository;

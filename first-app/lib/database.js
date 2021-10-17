@@ -1,41 +1,44 @@
-'use strict';
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var database = function () {
-    var conn = null,
+const database = (() => {
+  let conn = null;
 
-        init = function (config) {
-            console.log('Trying to connect to ' + config.host + '/' + config.database + ' MongoDB database');
-            var options = {
-                promiseLibrary: global.Promise,
-                useNewUrlParser: true,
-                useUnifiedTopology: true
-            };
+  const init = (config) => {
+    console.log(
+      `Trying to connect to ${config.host}/${config.database} MongoDB database`,
+    );
 
-            var connString = `mongodb://${config.host}/${config.database}`;
-            mongoose.connect(connString, options);
-            conn = mongoose.connection;
-            conn.on('error', console.error.bind(console, 'connection error:'));
-            conn.once('open', function() {
-                console.log('db connection open');
-            });
-            return conn;
-        },
-
-        close = function() {
-            if (conn) {
-                conn.close(function () {
-                    console.log('Mongoose default connection disconnected through app termination');
-                    process.exit(0);
-                });
-            }
-        }
-
-    return {
-        init:  init,
-        close: close
+    const options = {
+      promiseLibrary: global.Promise,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
     };
+    const connString = `mongodb://${config.host}/${config.database}`;
 
-}();
+    mongoose.connect(connString, options);
+
+    conn = mongoose.connection;
+    conn.on('error', (err) => console.error('connection error:', err));
+    conn.once('open', () => console.log('db connection open'));
+
+    return conn;
+  };
+
+  const close = () => {
+    if (conn) {
+      conn.close(() => {
+        console.log(
+          'Mongoose default connection disconnected through app termination',
+        );
+        process.exit(0);
+      });
+    }
+  };
+
+  return {
+    init,
+    close,
+  };
+})();
 
 module.exports = database;
