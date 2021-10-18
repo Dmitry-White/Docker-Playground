@@ -1,15 +1,18 @@
+# docker build -t dmitrywhite/nodeapp:1.0 -f node.dockerfile .
 FROM        node:alpine
 
 LABEL       author="Dmitry White"
 
-ARG         PACKAGES=nano
-
-ENV         TERM xterm
-RUN         apk update && apk add $PACKAGES
+ENV         NODE_ENV=production
 
 WORKDIR     /var/www
+# Copy and intall dependencies as early as possible
+# so that this layer gets reused if changes appear
+# in the lines below
 COPY        package.json package-lock.json ./
 RUN         npm install
+
+ENV         PORT=3000
 
 COPY        . ./
 EXPOSE      $PORT
