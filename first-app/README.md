@@ -1,7 +1,7 @@
 # Node.js with MongoDB and Docker Demo
 
-Application demo designed to show how Node.js and MongoDB can be run in Docker containers. 
-The app uses Mongoose to create a simple database that stores Docker commands and examples. 
+Application demo designed to show how Node.js and MongoDB can be run in Docker containers.
+The app uses Mongoose to create a simple database that stores Docker commands and examples.
 
 Interested in learning more about Docker? Visit https://www.pluralsight.com/courses/docker-web-development to view my Docker for Web Developers course.
 
@@ -11,10 +11,24 @@ Interested in learning more about Docker? Visit https://www.pluralsight.com/cour
 
 2. Open a command prompt.
 
-3. Run the commands listed in `node.dockerfile` (see the comments at the top of the file).
+3. Build an image `docker build -f node.dockerfile -t nodeapp .`
 
-4. Navigate to http://localhost:3000. Use http://192.168.99.100:8080 in your browser to view the site if using Docker toolbox. This assumes that's the IP assigned to VirtualBox - change if needed.
+4. Run a container from the image
 
+Option 1: Create a custom bridge network and add containers into it
+
+- `docker network create --driver bridge isolated_network`
+- `docker run -d --net=isolated_network --name mongodb mongo`
+- NOTE: $(pwd) in the following line is for Mac and Linux. See https://blog.codewithdan.com/docker-volumes-and-print-working-directory-pwd/ for Windows examples.
+- `docker run -d --net=isolated_network --name nodeapp -p 3000:3000 -v $(pwd)/logs:/var/www/logs nodeapp`
+
+Option 2: Start MongoDB and Node and link Node to MongoDB container with legacy linking
+
+- `docker run -d --name my-mongodb mongo`
+- `docker run -d -p 3000:3000 --link my-mongodb:mongodb --name nodeapp nodeapp`
+- Seed the database with sample database. Run: `docker exec nodeapp node dbSeeder.js`
+
+5. Navigate to http://localhost:3000. Use http://192.168.99.100:8080 in your browser to view the site if using Docker toolbox. This assumes that's the IP assigned to VirtualBox - change if needed.
 
 ### Starting the Application with Docker Compose
 
@@ -44,7 +58,7 @@ Interested in learning more about Docker? Visit https://www.pluralsight.com/cour
 
 2. Install the LTS version of Node.js (http://nodejs.org).
 
-3. Open `config/config.development.json` and adjust the host name to your MongoDB server name (`localhost` normally works if you're running locally). 
+3. Open `config/config.development.json` and adjust the host name to your MongoDB server name (`localhost` normally works if you're running locally).
 
 4. Run `npm install`.
 
@@ -53,7 +67,3 @@ Interested in learning more about Docker? Visit https://www.pluralsight.com/cour
 6. Run `npm start` to start the server.
 
 7. Navigate to http://localhost:3000 in your browser.
-
-
-
-
