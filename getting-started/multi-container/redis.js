@@ -7,11 +7,11 @@ const redisHostname = "redis";
 const client = redis.createClient(redisPort, redisHostname);
 
 client.on("connect", () => {
-  console.log("Connected!");
+  logger.info("Connected!");
 });
 
 client.on("error", (error) => {
-  console.error(error);
+  logger.error(error);
 });
 
 const incrAsync = promisify(client.incr).bind(client);

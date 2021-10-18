@@ -1,7 +1,8 @@
 const DockerCommand = require('../models/dockerCommand');
+const { logger } = require('./logger');
 
 const dataInitializer = (() => {
-  const initializeData = (callback) => {
+  const initializeData = async () => {
     const runDockerCommand = new DockerCommand({
       command: 'run',
       description: 'Runs a Docker container',
@@ -19,15 +20,6 @@ const dataInitializer = (() => {
       ],
     });
 
-    const errorHandler = (err) => {
-      if (err) {
-        return callback(err);
-      }
-      return null;
-    };
-
-    runDockerCommand.save(errorHandler);
-
     const psDockerCommand = new DockerCommand({
       command: 'ps',
       description: 'Lists containers',
@@ -43,9 +35,13 @@ const dataInitializer = (() => {
       ],
     });
 
-    psDockerCommand.save(errorHandler);
-
-    callback();
+    try {
+      await runDockerCommand.save();
+      await psDockerCommand.save();
+    } catch (err) {
+      logger.error(err);
+      throw new Error(err);
+    }
   };
 
   return {

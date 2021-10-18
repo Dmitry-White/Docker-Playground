@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 
+const { logger } = require('./logger');
+
 const database = (() => {
   let conn = null;
 
   const init = (config) => {
-    console.log(
+    logger.info(
       `Trying to connect to ${config.host}/${config.database} MongoDB database`,
     );
 
@@ -18,8 +20,8 @@ const database = (() => {
     mongoose.connect(connString, options);
 
     conn = mongoose.connection;
-    conn.on('error', (err) => console.error('connection error:', err));
-    conn.once('open', () => console.log('db connection open'));
+    conn.on('error', (err) => logger.error('connection error:', err));
+    conn.once('open', () => logger.info('db connection open'));
 
     return conn;
   };
@@ -27,7 +29,7 @@ const database = (() => {
   const close = () => {
     if (conn) {
       conn.close(() => {
-        console.log(
+        logger.info(
           'Mongoose default connection disconnected through app termination',
         );
         process.exit(0);
