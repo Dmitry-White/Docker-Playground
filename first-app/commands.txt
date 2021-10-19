@@ -7,6 +7,12 @@ docker push dmitrywhite/nodeapp:1.0
 
 # Pull the Custom Image
 docker pull dmitrywhite/nodeapp:1.0
+
+# Run the Custom Image container
+docker run -p 3000:3000 -d dmitrywhite/nodeapp:1.0
+
+# View logs of the Custom Image container
+docker logs <CONTAINER_ID>
 --------------------------------------------------
 
 ------------------ Public Image ------------------
