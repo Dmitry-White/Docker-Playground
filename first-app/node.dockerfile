@@ -1,4 +1,3 @@
-# docker build -t dmitrywhite/nodeapp:1.0 -f node.dockerfile .
 FROM        node:alpine
 
 LABEL       author="Dmitry White"

@@ -1,0 +1,18 @@
+------------------ Custom Image ------------------
+# Build a Custom Image
+docker build -t dmitrywhite/nodeapp:1.0 -f node.dockerfile .
+
+# Push the Custom Image
+docker push dmitrywhite/nodeapp:1.0
+
+# Pull the Custom Image
+docker pull dmitrywhite/nodeapp:1.0
+--------------------------------------------------
+
+------------------ Public Image ------------------
+# Pull a Public Image
+docker pull nginx:alpine
+
+# Run the Public Image container
+docker run -p 8080:80 -d --name nginxserver nginx:alpine
+--------------------------------------------------
