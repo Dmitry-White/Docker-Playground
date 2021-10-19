@@ -21,4 +21,7 @@ docker pull nginx:alpine
 
 # Run the Public Image container
 docker run -p 8080:80 -d --name nginxserver nginx:alpine
+
+# Run the Public Image container with a volume
+docker run -p 8080:80 -v /$(pwd)/nginx:/usr/share/nginx/html:ro -d --name nginxserver nginx:alpine
 --------------------------------------------------
