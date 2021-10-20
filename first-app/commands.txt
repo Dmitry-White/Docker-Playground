@@ -16,6 +16,13 @@ docker logs <CONTAINER_ID>
 
 # Run the Custom Image container with a volume
 docker run -p 3000:3000 -v /$(pwd)/logs:/var/www/logs -d dmitrywhite/nodeapp:1.0
+
+# Run a container in a User-Defined network
+# Note: "--name <CONTAINER_NAME>" part is used for automatic DNS resolution
+docker run -d --net=isolated_network --name <CONTAINER_NAME> <IMAGE_NAME>
+
+# Run the Custom Image container with a volume in a User-Defined network
+docker run -d --net=isolated_network --name nodeapp -p 3000:3000 -v /$(pwd)/logs:/var/www/logs dmitrywhite/nodeapp:1.0
 --------------------------------------------------
 
 ------------------ Public Image ------------------
