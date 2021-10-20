@@ -51,6 +51,9 @@ docker network create --driver bridge <NETWORK_NAME>
 # List Networks
 docker network ls
 
+# Inspect Network
+docker network inspect <NETWORK_NAME>
+
 # Remove Network
 docker network rm <NETWORK_NAME>
 --------------------------------------------------
