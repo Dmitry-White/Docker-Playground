@@ -29,7 +29,7 @@ docker run -it --name web -p 8000:8080 dmitrywhite/docker-playground:first-conta
 docker container ls
 docker ps
 
-# List Containers, Only Running
+# List Containers
 docker container ls -a
 docker ps -a
 
