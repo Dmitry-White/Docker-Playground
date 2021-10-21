@@ -20,3 +20,6 @@ docker attach <CONTAINER_ID>
 
 # Detach from a Container
 Ctrl+p, Ctrl+q
+
+# Look for published ports of a Container
+docker port <CONTAINER_ID or CONTAINER_NAME>
