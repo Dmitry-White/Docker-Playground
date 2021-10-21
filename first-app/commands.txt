@@ -57,3 +57,10 @@ docker network inspect <NETWORK_NAME>
 # Remove Network
 docker network rm <NETWORK_NAME>
 --------------------------------------------------
+
+--------------------- Shell ----------------------
+# Shell into a container
+# Note: "-it" stands for "interactice TTY/terminal"
+# Note: "<SHELL_NAME>" depends on container OS and can be "sh", "bash", "PowerShell", etc
+docker exec -it <CONTAINER_ID / CONTAINER_NAME> <SHELL_NAME>
+--------------------------------------------------
