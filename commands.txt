@@ -1,0 +1,22 @@
+# Manually build an Image from a container
+docker commit <CONTAINER_ID>
+
+# Manually tag an Image
+docker tag <IMAGE_ID> <IMAGE_NAME>
+
+# Run Container, run a single command and remove on exit
+docker run -ti --rm <IMAGE_NAME> <COMMAND>
+docker run -ti --rm ubuntu sleep 3
+
+# Run Container, run multiple commands and remove on exit
+docker run -ti --rm <IMAGE_NAME> bash -c "<COMMAND>"
+docker run -ti --rm ubuntu bash -c "sleep 3; echo Done!"
+
+# Run Container in detached mode
+docker run -d -it ubuntu
+
+# Attach to a Container
+docker attach <CONTAINER_ID>
+
+# Detach from a Container
+Ctrl+p, Ctrl+q
