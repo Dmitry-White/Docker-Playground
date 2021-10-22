@@ -1,0 +1,15 @@
+----------------- Netcat Basics ------------------
+# Netcat is a simple networking utility 
+# which reads and writes data 
+# across network connections using the TCP/IP protocol.
+
+# Intall netcat on Ubuntu
+sudo apt-get update -y
+sudo apt-get install -y netcat
+--------------------------------------------------
+
+------------------ Manual Setup ------------------
+--------------------------------------------------
+
+------------------- Auto Setup -------------------
+--------------------------------------------------
