@@ -12,4 +12,28 @@ sudo apt-get install -y netcat
 --------------------------------------------------
 
 ------------------- Auto Setup -------------------
+
+# Run the above architecture with "docker-compose.yml"
+docker-compose up
+
+# Connect to the running containers
+docker attach relay
+docker attach transmitter
+docker attach receiver
+
+# Setup relay from one port to another
+nc -lp 8080 | nc -lp 8081
+
+# Connect transmitter to the relay
+nc relay 8080
+
+# Connect receiver to the relay
+nc relay 8081
+
+# Test connectivity
+Hello from the other side!
+
+# Remove the above architecture
+docker-compose down
+
 --------------------------------------------------
