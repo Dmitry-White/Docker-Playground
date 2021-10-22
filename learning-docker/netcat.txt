@@ -4,15 +4,42 @@
 # across network connections using the TCP/IP protocol.
 
 # Intall netcat on Ubuntu
-sudo apt-get update -y
-sudo apt-get install -y netcat
+apt-get update -y
+apt-get install -y netcat
 --------------------------------------------------
 
------------------- Manual Setup ------------------
---------------------------------------------------
+------------------ Manual Setup, No Network ------------------
+# Run a Container with 2 published ports in detached mode
+docker run -ti -d --name <CONTAINER_NAME> -p <HOST_PORT>:<INTERNAL_PORT> -p <HOST_PORT>:<INTERNAL_PORT> ubuntu bash
+
+# Run a relay, transmitter, receiver Containers
+docker run -ti -d --name relay -p 8080:8080 -p 8081:8081 ubuntu bash
+docker run -ti -d --name transmitter ubuntu bash
+docker run -ti -d --name receiver ubuntu bash
+
+# Connect to the running containers
+docker attach relay
+docker attach transmitter
+docker attach receiver
+
+# Intall netcat on relay, transmitter, receiver
+apt-get update -y
+apt-get install -y netcat
+
+# Setup relay from one port to another
+nc -lp 8080 | nc -lp 8081
+
+# Connect transmitter to the relay through the host network
+nc host.docker.internal 8080
+
+# Connect receiver to the relay through the host network
+nc host.docker.internal 8081
+
+# Test connectivity
+Hello from the other side!
+--------------------------------------------------------------
 
 ------------------- Auto Setup -------------------
-
 # Run the above architecture with "docker-compose.yml"
 docker-compose up
 
@@ -35,5 +62,4 @@ Hello from the other side!
 
 # Remove the above architecture
 docker-compose down
-
 --------------------------------------------------
