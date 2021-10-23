@@ -83,7 +83,7 @@ Hello from the other side!
 
 ------------------- Auto Setup -------------------
 # Run the above architecture with "docker-compose.yml"
-docker-compose up
+docker-compose up -d
 
 # Connect to the running containers
 docker attach relay

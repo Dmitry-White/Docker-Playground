@@ -1,0 +1,35 @@
+version: '3.7'
+
+services:
+
+  relay:
+    build: .
+    tty: true
+    stdin_open: true
+    container_name: relay
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    networks:
+      - medium
+
+  transmitter:
+    build: .
+    tty: true
+    stdin_open: true
+    container_name: transmitter
+    networks:
+      - medium
+
+  receiver:
+    build: .
+    tty: true
+    stdin_open: true
+    container_name: receiver
+    networks:
+      - medium
+
+networks:
+  medium:
+    name: medium
+    driver: bridge
