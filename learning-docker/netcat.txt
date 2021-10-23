@@ -9,6 +9,10 @@ apt-get install -y netcat
 --------------------------------------------------
 
 ------------------ Manual Setup, No Network ------------------
+# Without a custom network containers need to rely on an internal docker variable
+# for DNS resolution of the host machine
+# in order to leave into the host network and go back through another port
+
 # Run a Container with 2 published ports in detached mode
 docker run -ti -d --name <CONTAINER_NAME> -p <HOST_PORT>:<INTERNAL_PORT> -p <HOST_PORT>:<INTERNAL_PORT> ubuntu bash
 
@@ -38,6 +42,44 @@ nc host.docker.internal 8081
 # Test connectivity
 Hello from the other side!
 --------------------------------------------------------------
+
+------------------ Manual Setup, With Network ------------------
+# With a custom network containers can have connectivity and DNS resolution
+# within docker isolated network environment
+# without the need to leave into the host network and to go back through another port
+
+# Run a Container with 2 published ports in detached mode
+docker run -ti -d --name <CONTAINER_NAME> -p <HOST_PORT>:<INTERNAL_PORT> -p <HOST_PORT>:<INTERNAL_PORT> ubuntu bash
+
+# Create a network for containers to share
+docker network create --driver bridge medium
+
+# Run a relay, transmitter, receiver Containers
+docker run -ti -d --net medium --name relay -p 8080:8080 -p 8081:8081 ubuntu bash
+docker run -ti -d --net medium --name transmitter ubuntu bash
+docker run -ti -d --net medium --name receiver ubuntu bash
+
+# Connect to the running containers
+docker attach relay
+docker attach transmitter
+docker attach receiver
+
+# Intall netcat on relay, transmitter, receiver
+apt-get update -y
+apt-get install -y netcat
+
+# Setup relay from one port to another
+nc -lp 8080 | nc -lp 8081
+
+# Connect transmitter to the relay through the host network
+nc relay 8080
+
+# Connect receiver to the relay through the host network
+nc relay 8081
+
+# Test connectivity
+Hello from the other side!
+----------------------------------------------------------------
 
 ------------------- Auto Setup -------------------
 # Run the above architecture with "docker-compose.yml"
