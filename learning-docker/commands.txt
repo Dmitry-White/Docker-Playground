@@ -23,3 +23,6 @@ Ctrl+p, Ctrl+q
 
 # Look for published ports of a Container
 docker port <CONTAINER_ID or CONTAINER_NAME>
+
+# Run a container with full access to the host networking
+docker run -ti --rm --net=host --privileged=true ubuntu bash
