@@ -1,8 +1,16 @@
-FROM        node:alpine
+FROM        node:16.5.0-alpine
 
 LABEL       author="Dmitry White"
 
+# The ARG instruction defines a variable that users can pass at build-time to the builder
+# with the docker build command using the --build-arg <varname>=<value> flag
+# or in Docker Compose file "build.args"
+ARG         buildversion
+
 ENV         NODE_ENV=production
+ENV         BUILD=$buildversion
+
+RUN         echo "Build version: $BUILD"
 
 WORKDIR     /var/www
 # Copy and intall dependencies as early as possible
