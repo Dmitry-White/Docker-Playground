@@ -1,0 +1,66 @@
+------------------ Custom Image ------------------
+# Build a Custom Image
+docker build -t dmitrywhite/nodeapp:1.0 -f node.dockerfile .
+
+# Push the Custom Image
+docker push dmitrywhite/nodeapp:1.0
+
+# Pull the Custom Image
+docker pull dmitrywhite/nodeapp:1.0
+
+# Run the Custom Image container
+docker run -p 3000:3000 -d dmitrywhite/nodeapp:1.0
+
+# View logs of the Custom Image container
+docker logs <CONTAINER_ID>
+
+# Run the Custom Image container with a volume
+docker run -p 3000:3000 -v /$(pwd)/logs:/var/www/logs -d dmitrywhite/nodeapp:1.0
+
+# Run a container in a User-Defined network
+# Note: "--name <CONTAINER_NAME>" part is used for automatic DNS resolution
+docker run -d --net=isolated_network --name <CONTAINER_NAME> <IMAGE_NAME>
+
+# Run the Custom Image container with a volume in a User-Defined network
+docker run -d --net=isolated_network --name nodeapp -p 3000:3000 -v /$(pwd)/logs:/var/www/logs dmitrywhite/nodeapp:1.0
+--------------------------------------------------
+
+------------------ Public Image ------------------
+# Pull a Public Image
+docker pull nginx:alpine
+
+# Run the Public Image container
+docker run -p 8080:80 -d --name nginxserver nginx:alpine
+
+# Run the Public Image container with a volume
+docker run -p 8080:80 -v /$(pwd)/nginx:/usr/share/nginx/html:ro -d --name nginxserver nginx:alpine
+--------------------------------------------------
+
+-------------------- Network ---------------------
+# There are 2 types of Bridge Networks: 
+# 1. Default bridge network (created at Docker start)
+# 2. User-defined bridge network (manually and separately created)
+# In default bridge network container should be manually linked at create-time 
+# and use IP addresses before they can communicate.
+# User-defined network have an automatic DNS resolution by container name
+# and does not share environment variables between container unlike in default bridge network case.
+
+# Create a User-Defined Bridge Network
+docker network create --driver bridge <NETWORK_NAME>
+
+# List Networks
+docker network ls
+
+# Inspect Network
+docker network inspect <NETWORK_NAME>
+
+# Remove Network
+docker network rm <NETWORK_NAME>
+--------------------------------------------------
+
+--------------------- Shell ----------------------
+# Shell into a container
+# Note: "-it" stands for "interactice TTY/terminal"
+# Note: "<SHELL_NAME>" depends on container OS and can be "sh", "bash", "PowerShell", etc
+docker exec -it <CONTAINER_ID / CONTAINER_NAME> <SHELL_NAME>
+--------------------------------------------------
