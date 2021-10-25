@@ -7,6 +7,11 @@ LABEL       author="Dmitry White"
 # or in Docker Compose file "build.args"
 ARG         buildversion
 
+# One major difference between specifying env variables here
+# and specifying them in docker-compose file is the desired
+# WHEN for variable to be available: 
+# Dockerfile will be Build-Time,
+# docker-compose file will be Run-Time
 ENV         NODE_ENV=production
 ENV         BUILD=$buildversion
 
