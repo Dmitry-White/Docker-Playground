@@ -12,10 +12,10 @@ ARG         buildversion
 # WHEN for variable to be available: 
 # Dockerfile will be Build-Time,
 # docker-compose file will be Run-Time
-ENV         NODE_ENV=production
+ENV         NODE_ENV=development
 ENV         BUILD=$buildversion
 
-RUN         echo "Build version: $BUILD"
+RUN         echo "Environment: ${NODE_ENV}; Build version: $BUILD;"
 
 WORKDIR     /var/www
 # Copy and intall dependencies as early as possible
