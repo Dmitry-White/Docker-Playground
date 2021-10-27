@@ -12,7 +12,22 @@ services:
       args:
         buildversion: 1
     ports:
-      - "3000:3000"
+      # Short Syntax 3 options:
+      # - HOST:CONTAINER
+      # - CONTAINER (an ephemeral host port is chosen for the host port)
+      # - IPADDR:HOST:CONTAINER
+      # When mapping ports in the HOST:CONTAINER format,
+      # you may experience erroneous results when using a container port lower than 60,
+      # because YAML parses numbers in the format xx:yy as a base-60 value.
+
+      # - "3000:3000"
+
+      # Long Syntax:
+      # allows the configuration of additional fields that can’t be expressed in the short form
+      - target: 3000
+        published: 3000
+        protocol: tcp # tcp or udp
+        mode: host # host or ingress
     networks:
       - nodeapp-network
     volumes:
