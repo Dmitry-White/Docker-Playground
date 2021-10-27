@@ -13,6 +13,8 @@ const { renderError, handleNotFoundRoute } = require('./middlewares/error');
 
 const port = process.env.PORT || 3000;
 
+logger.info('App Environment', process.env);
+
 const app = express();
 
 // view engine setup

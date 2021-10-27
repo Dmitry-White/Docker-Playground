@@ -7,7 +7,9 @@ services:
     image: nodeapp
     build:
       context: .
+      # ################ ENVIRONMENT ###################
       # Requires env variable: export APP_ENV=development OR export APP_ENV=production
+      # ################################################
       dockerfile: node.${APP_ENV}.dockerfile
       args:
         buildversion: 1
@@ -28,6 +30,13 @@ services:
         published: 3000
         protocol: tcp # tcp or udp
         mode: host # host or ingress
+    # ################ ENVIRONMENT ###################
+    environment:
+      - APP_VERSION=1.0
+    # AND/OR
+    env_file:
+      - ./.node.${APP_ENV}.env
+    # ################################################
     networks:
       - nodeapp-network
     volumes:
