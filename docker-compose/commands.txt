@@ -65,15 +65,12 @@ docker network rm <NETWORK_NAME>
 docker exec -it <CONTAINER_ID / CONTAINER_NAME> <SHELL_NAME>
 --------------------------------------------------
 
----------------- Docker Compose ------------------
+---------- Docker Compose Orchestration ----------
 # Run Services
 docker-compose up
 
 # Run Services in Detached mode
 docker-compose up -d
-
-# See logs if in Detached mode
-docker-compose logs --follow
 
 # Run a Service in isolation, recreating only it and leaving everything as-is
 docker-compose up --no-deps <SERVICE_NAME>
@@ -95,4 +92,15 @@ docker-compose stop <SERVICE_NAME>
 
 # Shutdown and Remove Services
 docker-compose down
+--------------------------------------------------
+
+--------------- Docker Compose Logs --------------
+# View logs of Services
+docker-compose logs
+
+# View logs of Services and follow updates
+docker-compose logs --follow
+
+# View logs of a Service
+docker-compose logs <SERVICE_NAME>
 --------------------------------------------------
