@@ -64,3 +64,35 @@ docker network rm <NETWORK_NAME>
 # Note: "<SHELL_NAME>" depends on container OS and can be "sh", "bash", "PowerShell", etc
 docker exec -it <CONTAINER_ID / CONTAINER_NAME> <SHELL_NAME>
 --------------------------------------------------
+
+---------------- Docker Compose ------------------
+# Run Services
+docker-compose up
+
+# Run Services in Detached mode
+docker-compose up -d
+
+# See logs if in Detached mode
+docker-compose logs --follow
+
+# Run a Service in isolation, recreating only it and leaving everything as-is
+docker-compose up --no-deps <SERVICE_NAME>
+
+# Start Services with stopped containers
+docker-compose start
+
+# Start a Services with a stopped container
+docker-compose start <SERVICE_NAME>
+
+# Restart a Services
+docker-compose restart <SERVICE_NAME>
+
+# Stop Services without removing containers
+docker-compose stop
+
+# Stop a Service without removing the container
+docker-compose stop <SERVICE_NAME>
+
+# Shutdown and Remove Services
+docker-compose down
+--------------------------------------------------
