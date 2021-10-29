@@ -104,3 +104,13 @@ docker-compose logs --follow
 # View logs of a Service
 docker-compose logs <SERVICE_NAME>
 --------------------------------------------------
+
+--------------- Docker Compose Shell --------------
+# Shell into a container
+# Note: "<SHELL_NAME>" depends on container OS and can be "sh", "bash", "PowerShell", etc
+docker-compose exec <SERVICE_NAME> <SHELL_NAME>
+
+# Execute script inside a container
+docker-compose exec <SERVICE_NAME> <...>
+docker-compose exec node node dbSeeder.js
+--------------------------------------------------
