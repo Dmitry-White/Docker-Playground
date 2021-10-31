@@ -75,6 +75,9 @@ docker-compose up -d
 # Run a Service in isolation, recreating only it and leaving everything as-is
 docker-compose up --no-deps <SERVICE_NAME>
 
+# Run Services with Scaling
+docker-compose up --scale <SERVICE_NAME>=<QUANTITY>
+
 # Start Services with stopped containers
 docker-compose start
 
