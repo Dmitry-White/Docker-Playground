@@ -7,3 +7,5 @@
 3. [Learning Docker](https://www.linkedin.com/learning/learning-docker-2018)
 
 4. [Building and Orchestrating Containers with Docker Compose](https://app.pluralsight.com/library/courses/docker-compose-building-orchestrating-containers)
+
+5. [Developing Docker Apps: Core Principles](https://app.pluralsight.com/library/courses/docker-apps-developing-core-principles)

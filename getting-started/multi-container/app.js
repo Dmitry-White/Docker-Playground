@@ -36,5 +36,5 @@ app.get("/", async (req, res) => {
 });
 
 app.listen(port, () => {
-  logger.info(`Listening on: http://${hostname}:${port}`);
+  console.info(`Listening on: http://${hostname}:${port}`);
 });
