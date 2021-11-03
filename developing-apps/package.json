@@ -5,8 +5,8 @@
   "author": "Dmitry White",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon app.js",
-    "prod": "node app.js"
+    "dev": "nodemon -L src/app.js",
+    "prod": "node src/app.js"
   },
   "dependencies": {
     "express": "^4.17.1",

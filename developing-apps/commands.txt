@@ -1,6 +1,8 @@
-# TBD
-TBD
+# Build Image
+docker build -t web .
 
+# Run Container in Development
+docker run --rm -it -p 8000:8080 -v "/$(pwd)/src:/app/src" web dev
 
-
-
+# Run Container in Production
+docker run --rm -it -p 8000:8080 -v "/$(pwd)/src:/app/src" web
